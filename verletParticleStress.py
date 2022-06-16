@@ -20,7 +20,7 @@ done = False
 clock = pygame.time.Clock()
 
 verlet = Integration({
-    'iterations': 1,
+    'iterations': 5,
     'stageMinVect': Vector2D(0, 0),
     'stageMaxVect': Vector2D(CANVAS_WIDTH, CANVAS_HEIGHT),
     'gravity': Vector2D(0, 0.05)

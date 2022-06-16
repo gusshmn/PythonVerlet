@@ -4,6 +4,8 @@ import math
 from Lib2D import Vector2D
 from VerletIntegration import Integration, Particle, Constraint, Prefabs
 
+import sys
+
 # Settings #############################################################
 
 # put any adjustable settings here that would be interesting to tinker with.
@@ -21,6 +23,7 @@ done = False
 clock = pygame.time.Clock()
 
 verlet = Integration({
+    'iterations': 5,
     'stageMinVect': Vector2D(0, 0),
     'stageMaxVect': Vector2D(CANVAS_WIDTH, CANVAS_HEIGHT),
     'gravity': Vector2D(0, 0.05)
@@ -45,6 +48,10 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        if event.type == pygame.KEYDOWN:
+            pygame.quit()
+
+            sys.exit()
 
     screen.fill((0, 0, 0))
 
@@ -52,7 +59,7 @@ while not done:
     verlet.runTimeStep()
 
     for constraint in verlet.constraints:
-        pygame.draw.line(screen, (0, 255, 0), (constraint.ends.startParticle.vector.x, constraint.ends.startParticle.vector.y),
+        pygame.draw.line(screen, (0, 255, 250), (constraint.ends.startParticle.vector.x, constraint.ends.startParticle.vector.y),
                          (constraint.ends.endParticle.vector.x, constraint.ends.endParticle.vector.y))
 
     pygame.display.flip()
